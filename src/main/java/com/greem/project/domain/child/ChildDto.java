@@ -4,19 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class ChildDto {
     private Long id;
-    private String fullName;
+    private String firstName;
+    private String lastName;
     private String dateOfBirth;
     private String gender;
 
-    public ChildDto(String fullName, String dateOfBirth, String gender) {
-        this.fullName = fullName;
+    public ChildDto(String firstName, String lastName, String dateOfBirth, String gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
     }

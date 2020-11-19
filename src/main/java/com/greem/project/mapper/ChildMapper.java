@@ -17,7 +17,8 @@ public class ChildMapper {
         LocalDate dateOfBirth = child.getDateOfBirth();
         return new ChildDto(
             child.getId(),
-            child.getFirstName() + " " + child.getLastName(),
+            child.getFirstName(),
+            child.getLastName(),
             dateOfBirth.getDayOfMonth() + "-" + dateOfBirth.getMonthValue() + "-" + dateOfBirth.getYear(),
             child.getGender().getAbbreviation()
         );
@@ -29,8 +30,8 @@ public class ChildMapper {
                 .collect(Collectors.toList());
         return new Child(
                 childDto.getId(),
-                childDto.getFullName().split(" ")[0],
-                childDto.getFullName().split(" ")[1],
+                childDto.getFirstName(),
+                childDto.getLastName(),
                 LocalDate.of(dateOfBirth.get(2), dateOfBirth.get(1), dateOfBirth.get(0)),
                 Gender.from(childDto.getGender())
         );

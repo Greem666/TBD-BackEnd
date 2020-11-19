@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @RequestMapping("/v1")
 @RequiredArgsConstructor
@@ -23,12 +25,20 @@ public class ChildController {
         return childService.getChild(childId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/child")
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/child",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
     public ChildDto addChild(@RequestBody ChildDto childDto) {
         return childService.addChild(childDto);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/child")
+    @RequestMapping(
+            method = RequestMethod.PUT,
+            value = "/child",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
     public ChildDto updateChild(@RequestBody ChildDto childDto) {
         return childService.updateChild(childDto);
     }

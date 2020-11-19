@@ -13,9 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -35,8 +32,8 @@ public class ChildMapperTestSuite {
 
         // Then
         Assert.assertEquals(child.getId(), childDto.getId());
-        Assert.assertEquals("test_name", childDto.getFullName().split(" ")[0]);
-        Assert.assertEquals("test_surname", childDto.getFullName().split(" ")[1]);
+        Assert.assertEquals("test_name", childDto.getFirstName());
+        Assert.assertEquals("test_surname", childDto.getLastName());
         Assert.assertEquals("1-1-2011", childDto.getDateOfBirth());
         Assert.assertEquals("M", childDto.getGender());
     }
@@ -44,7 +41,7 @@ public class ChildMapperTestSuite {
     @Test
     public void shouldMapToChild() {
         // Given
-        ChildDto childDto = new ChildDto(666L,"John Doe", "1-1-2011", "M");
+        ChildDto childDto = new ChildDto("John","Doe", "1-1-2011", "M");
 
         // When
         Child child = childMapper.mapToChild(childDto);
@@ -74,14 +71,14 @@ public class ChildMapperTestSuite {
 
         // Then
         Assert.assertEquals(childOne.getId(), retrievedChildOne.getId());
-        Assert.assertEquals("test_name1", retrievedChildOne.getFullName().split(" ")[0]);
-        Assert.assertEquals("test_surname1", retrievedChildOne.getFullName().split(" ")[1]);
+        Assert.assertEquals("test_name1", retrievedChildOne.getFirstName());
+        Assert.assertEquals("test_surname1", retrievedChildOne.getLastName());
         Assert.assertEquals("1-1-2011", retrievedChildOne.getDateOfBirth());
         Assert.assertEquals("M", retrievedChildOne.getGender());
 
         Assert.assertEquals(childTwo.getId(), retrievedChildTwo.getId());
-        Assert.assertEquals("test_name2", retrievedChildTwo.getFullName().split(" ")[0]);
-        Assert.assertEquals("test_surname2", retrievedChildTwo.getFullName().split(" ")[1]);
+        Assert.assertEquals("test_name2", retrievedChildTwo.getFirstName());
+        Assert.assertEquals("test_surname2", retrievedChildTwo.getLastName());
         Assert.assertEquals("2-2-2011", retrievedChildTwo.getDateOfBirth());
         Assert.assertEquals("O", retrievedChildTwo.getGender());
     }

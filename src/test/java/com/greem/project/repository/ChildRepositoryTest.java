@@ -24,6 +24,8 @@ public class ChildRepositoryTest {
     @Test
     public void shouldGetAllChildren() {
         // Given
+        int initialChildCount = childRepository.findAll().size();
+
         Child childOne = new Child("test1", "test1", LocalDate.of(2019, 1, 1), Gender.MALE);
         Child childTwo = new Child("test2", "test2", LocalDate.of(2020, 2, 2), Gender.FEMALE);
 
@@ -33,7 +35,7 @@ public class ChildRepositoryTest {
         List<Child> allChildren = childRepository.findAll();
 
         // Then
-        Assert.assertEquals(2, allChildren.size());
+        Assert.assertEquals(initialChildCount+2, allChildren.size());
         Assert.assertTrue(allChildren.contains(childOne));
         Assert.assertTrue(allChildren.contains(childTwo));
 

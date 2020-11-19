@@ -37,7 +37,7 @@ public class ChildControllerTestSuite {
     public void shouldGetAllChildren() throws Exception {
         // Given
         List<ChildDto> childDtoList = new ArrayList<>();
-        childDtoList.add(new ChildDto(1L, "test_name test_surname", "1-1-2011", "M"));
+        childDtoList.add(new ChildDto(1L, "test_name", "test_surname", "1-1-2011", "M"));
 
         when(childService.getAllChildren()).thenReturn(childDtoList);
 
@@ -46,7 +46,8 @@ public class ChildControllerTestSuite {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].fullName", is("test_name test_surname")))
+                .andExpect(jsonPath("$[0].firstName", is("test_name")))
+                .andExpect(jsonPath("$[0].lastName", is("test_surname")))
                 .andExpect(jsonPath("$[0].dateOfBirth", is("1-1-2011")))
                 .andExpect(jsonPath("$[0].gender", is("M")));
     }
@@ -54,7 +55,7 @@ public class ChildControllerTestSuite {
     @Test
     public void shouldGetChild() throws Exception {
         // Given
-        ChildDto childDto = new ChildDto(1L, "test_name test_surname", "1-1-2011", "M");
+        ChildDto childDto = new ChildDto(1L, "test_name", "test_surname", "1-1-2011", "M");
 
         when(childService.getChild(anyLong())).thenReturn(childDto);
 
@@ -62,7 +63,8 @@ public class ChildControllerTestSuite {
         mockMvc.perform(get("/v1/child/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.fullName", is("test_name test_surname")))
+                .andExpect(jsonPath("$.firstName", is("test_name")))
+                .andExpect(jsonPath("$.lastName", is("test_surname")))
                 .andExpect(jsonPath("$.dateOfBirth", is("1-1-2011")))
                 .andExpect(jsonPath("$.gender", is("M")));
     }
@@ -70,7 +72,7 @@ public class ChildControllerTestSuite {
     @Test
     public void shouldAddChild() throws Exception {
         // Given
-        ChildDto childDto = new ChildDto(1L, "test_name test_surname", "1-1-2011", "M");
+        ChildDto childDto = new ChildDto(1L, "test_name", "test_surname", "1-1-2011", "M");
 
         when(childService.addChild(ArgumentMatchers.any(ChildDto.class))).thenReturn(childDto);
 
@@ -84,7 +86,8 @@ public class ChildControllerTestSuite {
                     .content(jsonContent))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.fullName", is("test_name test_surname")))
+                .andExpect(jsonPath("$.firstName", is("test_name")))
+                .andExpect(jsonPath("$.lastName", is("test_surname")))
                 .andExpect(jsonPath("$.dateOfBirth", is("1-1-2011")))
                 .andExpect(jsonPath("$.gender", is("M")));
         verify(childService, times(1)).addChild(ArgumentMatchers.any(ChildDto.class));
@@ -93,7 +96,7 @@ public class ChildControllerTestSuite {
     @Test
     public void shouldUpdateChild() throws Exception {
         // Given
-        ChildDto childDto = new ChildDto(1L, "test_name test_surname", "1-1-2011", "M");
+        ChildDto childDto = new ChildDto(1L, "test_name", "test_surname", "1-1-2011", "M");
 
         when(childService.updateChild(ArgumentMatchers.any(ChildDto.class))).thenReturn(childDto);
 
@@ -107,7 +110,8 @@ public class ChildControllerTestSuite {
                     .content(jsonContent))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.fullName", is("test_name test_surname")))
+                .andExpect(jsonPath("$.firstName", is("test_name")))
+                .andExpect(jsonPath("$.lastName", is("test_surname")))
                 .andExpect(jsonPath("$.dateOfBirth", is("1-1-2011")))
                 .andExpect(jsonPath("$.gender", is("M")));
         verify(childService, times(1)).updateChild(ArgumentMatchers.any(ChildDto.class));
@@ -116,7 +120,7 @@ public class ChildControllerTestSuite {
     @Test
     public void shouldDeleteChild() throws Exception {
         // Given
-        ChildDto childDto = new ChildDto(1L, "test_name test_surname", "1-1-2011", "M");
+        ChildDto childDto = new ChildDto(1L, "test_name", "test_surname", "1-1-2011", "M");
 
         when(childService.deleteChild(any())).thenReturn(childDto);
 
@@ -124,7 +128,8 @@ public class ChildControllerTestSuite {
         mockMvc.perform(delete("/v1/child/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.fullName", is("test_name test_surname")))
+                .andExpect(jsonPath("$.firstName", is("test_name")))
+                .andExpect(jsonPath("$.lastName", is("test_surname")))
                 .andExpect(jsonPath("$.dateOfBirth", is("1-1-2011")))
                 .andExpect(jsonPath("$.gender", is("M")));
         verify(childService, times(1)).deleteChild(ArgumentMatchers.any());
